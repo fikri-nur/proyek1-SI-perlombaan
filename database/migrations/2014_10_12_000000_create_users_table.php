@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('tempat_lahir', 30);
             $table->date('tgl_lahir');
             $table->string('telp', 13);
-            $table->integer('level')->default(1);
+            $table->integer('level')->default(3);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
