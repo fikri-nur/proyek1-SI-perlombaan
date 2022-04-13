@@ -40,16 +40,45 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav nav-pills me-auto">
+                        @guest
+                        @if (Route::has('login') || Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link @yield('menuHome')" href="/home">{{ __('Home') }}</a>
+                            <a class="nav-link @yield('menuHome')" href="/">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Lomba') }}</a>
+                            <a class="nav-link @yield('menuLomba')" href="/lomba">{{ __('Lomba') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">{{ __('About Us') }}</a>
                         </li>
+                        @endif
+                        @else
+                        @if (auth()->user()->level == 1)
+                        <li class="nav-item">
+                            <a class="nav-link @yield('menuDashboard')" href="/admin/dashboard">Dashboard Admin</a>
+                        </li>
+                        @elseif (auth()->user()->level == 2)
+                        <li class="nav-item">
+                            <a class="nav-link @yield('menuDashboard')" href="/penyelenggara/dashboard">Dashboard Penyelenggara</a>
+                        </li>
+                        @elseif (auth()->user()->level == 3)
+                        <li class="nav-item">
+                            <a class="nav-link @yield('menuHome')" href="/">{{ __('Home') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @yield('menuLomba')" href="/lomba">{{ __('Lomba') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @yield('')" href="">{{ __('Lomba Anda') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">{{ __('About Us') }}</a>
+                        </li>
+                        @else
+                        @endif
+                        @endguest
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav nav-pills ms-auto">
@@ -67,6 +96,7 @@
                         </li>
                         @endif
                         @else
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->nama_lengkap }}
@@ -74,7 +104,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                    document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -194,7 +224,7 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             Sistem Informasi Perlombaan |
-            Copyright &copy; {{ date("Y") }} 
+            Copyright &copy; {{ date("Y") }}
         </div>
         <!-- Copyright -->
     </footer>
