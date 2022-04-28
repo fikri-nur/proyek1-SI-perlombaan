@@ -8,6 +8,7 @@ use App\http\Controllers\AdminController;
 use App\http\Controllers\PenyelenggaraController;
 use App\http\Controllers\UserController;
 use App\Http\Middleware\Admin;
+use App\http\Controllers\AboutControllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/detail-lomba/{id}', [DataLombaController::class, 'detailLomba']);
 
 Route::get('/lomba', [DataLombaController::class, 'getDataLomba']);
+
+Route::resource('abou',AboutControllers::class);
 
 
 //Route Admin

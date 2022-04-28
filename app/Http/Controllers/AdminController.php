@@ -16,8 +16,15 @@ class AdminController extends Controller
     {
         return view('admin.admin-dashboard');
     }
+    public function getAdmin()
+    {
+        $count = DB::table('users')
+            ->select(
+                'users.*',
+            )
+            ->where('level', '1')
+            ->get()->count();
 
-    public function getAdmin(){
         $result = DB::table('users')
             ->select(
                 'users.*',
@@ -25,8 +32,8 @@ class AdminController extends Controller
             ->where('level', '1')
             ->get()
             ->all();
-            // dump($result);
-        return view('admin.admin.get', compact('result'));
+        // dump($result, $count);
+        return view('admin.admin.get', compact('result', 'count'));
     }
 
     public function editAdmin($id)
@@ -55,7 +62,8 @@ class AdminController extends Controller
         return redirect('/admin/dashboard/admin')->with('success', 'Berhasil Menjadikan User');
     }
 
-    public function getPenyelenggara(){
+    public function getPenyelenggara()
+    {
         $result = DB::table('users')
             ->select(
                 'users.*',
@@ -63,7 +71,7 @@ class AdminController extends Controller
             ->where('level', '2')
             ->get()
             ->all();
-            // dump($result);
+        // dump($result);
         return view('admin.penyelenggara.get', compact('result'));
     }
 
@@ -168,7 +176,8 @@ class AdminController extends Controller
                 'users.user_name',
                 DB::raw('DATE_FORMAT(data_lomba.tanggal_pembuatan, "%d-%b-%Y") as upload'),
                 DB::raw('DATE_FORMAT(data_lomba.tanggal_penutupan, "%d-%b-%Y") as deadline'),
-                DB::raw('SUBSTRING(data_lomba.deskripsi, 1, 100) as deskripsi'))
+                DB::raw('SUBSTRING(data_lomba.deskripsi, 1, 100) as deskripsi')
+            )
             ->orderBy('id_lomba')
             ->get()
             ->all();

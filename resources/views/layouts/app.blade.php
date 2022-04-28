@@ -49,13 +49,16 @@
                             <a class="nav-link @yield('menuLomba')" href="/lomba">{{ __('Lomba') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('About Us') }}</a>
+                            <a class="nav-link @yield('menuAbout')" href="/abou">{{ __('About Us') }}</a>
                         </li>
                         @endif
                         @else
                         @if (auth()->user()->level == 1)
                         <li class="nav-item">
                             <a class="nav-link @yield('menuDashboard')" href="/admin/dashboard">Dashboard Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @yield('menuAbout')" href="/abou">{{ __('About Us') }}</a>
                         </li>
                         @elseif (auth()->user()->level == 2)
                         <li class="nav-item">
@@ -72,7 +75,7 @@
                             <a class="nav-link @yield('')" href="">{{ __('Lomba Anda') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('About Us') }}</a>
+                            <a class="nav-link @yield('menuAbout')" href="/abou">{{ __('About Us') }}</a>
                         </li>
                         @else
                         @endif

@@ -67,7 +67,7 @@
                         <label for="harga" class="col-md-4 col-form-label text-md-right">{{ __('Biaya Pendaftaran') }}</label>
 
                         <div class="col-md-6">
-                            <input class="form-control" name="harga" type="text" value="" required>
+                            <input class="form-control" name="harga" type="number" value="" required>
                         </div>
                     </div>
 

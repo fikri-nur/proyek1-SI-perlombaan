@@ -39,9 +39,15 @@
                             <td>{{ $data->tempat_lahir }}</td>
                             <td>{{ $data->tgl_lahir }}</td>
                             <td>{{ $data->telp }}</td>
+                            @if (  $count > 1 )
                             <td>
                                 <a href="/admin/dashboard/admin/jadikan-user/{{$data->id}}" class=" btn btn-sm btn-success">Hapus Admin</a>
                             </td>
+                            @else
+                            <td>
+                                <p>Kosong</p>
+                            </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>
